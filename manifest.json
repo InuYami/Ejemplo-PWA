@@ -1,7 +1,7 @@
 {
     "short_name": "ServiceWorker",
     "name": "Ejemplo de clase",
-    "start_url": "./index.html",
+    "start_url": ".index.html",
     "scope": "./",
     "background_color": "#9D00FF",
     "theme_color": "#BF00FF",

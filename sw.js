@@ -27,7 +27,8 @@ self.addEventListener('install', evento=>{
                 'img/main.jpg',
                 'js/app.js',
                 'img/no-img.jpeg',
-                'offline.html'
+                'offline.html',
+                'manifest.json'
             ]);
         });
 
