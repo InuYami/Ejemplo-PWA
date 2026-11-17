@@ -28,7 +28,8 @@ self.addEventListener('install', evento=>{
                 'js/app.js',
                 'img/no-img.jpeg',
                 'offline.html',
-                'manifest.json'
+                'manifest.json',
+                'iconos'
             ]);
         });
 
