@@ -13,19 +13,20 @@ self.addEventListener('install', evento => {
                 './img/main.jpg',
                 './js/app.js',
                 './img/no-img.jpeg',
-                './pages/offline.html',
+                './pages/offline.html', // <-- Aquí estaba el fallo (vive dentro de /pages/)
                 './manifest.json',
+                './iconos/72x72.png',
+                './iconos/96x96.png',
                 './iconos/128x128.png',
                 './iconos/144x144.png',
                 './iconos/152x152.png',
-                '/iconos/384x384.png',
+                './iconos/384x384.png',
                 './iconos/512x512.png'
             ]);
         });
 
     const cacheInmutable = caches.open(CACHE_INMUTABLE)
         .then(cache => {
-            // Agregado el 'return' que faltaba
             return cache.add('https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css');
         });
 
@@ -38,7 +39,6 @@ function limpiarCache(nombreCache, numeroItems) {
             return cache.keys()
                 .then(keys => {
                     if (keys.length > numeroItems) {
-                        // Corregido: se pasa como arrow function para esperar a que borre
                         cache.delete(keys[0])
                             .then(() => limpiarCache(nombreCache, numeroItems));
                     }
@@ -51,16 +51,12 @@ self.addEventListener('fetch', evento => {
         .then(res => {
             if (res) return res;
 
-            console.log('No existe en cache, yendo a la web:', evento.request.url);
-
             return fetch(evento.request)
                 .then(resWeb => {
-                    // Validamos que la respuesta sea válida antes de guardar en caché dinámico
                     if (!resWeb || resWeb.status !== 200) {
                         return resWeb;
                     }
 
-                    // Clonamos ANTES de meterlo al proceso asíncrono del cache
                     const resClonada = resWeb.clone();
 
                     caches.open(CACHE_DINAMICO)
@@ -74,8 +70,8 @@ self.addEventListener('fetch', evento => {
         })
         .catch(err => {
             if (evento.request.headers.get('accept').includes('text/html')) {
-                // Corregido para que coincida con lo que guardaste en cacheBase
-                return caches.match('./offline.html');
+                // Coincide exactamente con la ruta guardada arriba
+                return caches.match('./pages/offline.html');
             }
         });
 
