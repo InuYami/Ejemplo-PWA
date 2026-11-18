@@ -2,7 +2,7 @@
   "name": "Mi PWA Service Worker",
   "short_name": "MiPWA",
   "start_url": "./index.html",
-  "scope": "./",
+
   "display": "standalone",
   "background_color": "#240046",
   "theme_color": "#BF00FF",
