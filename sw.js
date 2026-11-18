@@ -13,7 +13,7 @@ self.addEventListener('install', evento => {
                 './img/main.jpg',
                 './js/app.js',
                 './img/no-img.jpeg',
-                './pages/offline.html', // <-- Aquí estaba el fallo (vive dentro de /pages/)
+                './pages/offline.html',
                 './manifest.json',
                 './iconos/72x72.png',
                 './iconos/96x96.png',
@@ -76,4 +76,4 @@ self.addEventListener('fetch', evento => {
         });
 
     evento.respondWith(respuesta);
-});
+});  
