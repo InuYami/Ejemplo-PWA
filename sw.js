@@ -21,7 +21,9 @@ self.addEventListener('install', evento => {
                 './iconos/144x144.png',
                 './iconos/152x152.png',
                 './iconos/384x384.png',
-                './iconos/512x512.png'
+                './iconos/512x512.png',
+                './images/icons/icon-192x192.png',
+                './images/icons-ios/apple-launch-1125x2436.png'
             ]);
         });
 
@@ -70,10 +72,9 @@ self.addEventListener('fetch', evento => {
         })
         .catch(err => {
             if (evento.request.headers.get('accept').includes('text/html')) {
-                // Coincide exactamente con la ruta guardada arriba
                 return caches.match('./pages/offline.html');
             }
         });
 
     evento.respondWith(respuesta);
-});  
+});
